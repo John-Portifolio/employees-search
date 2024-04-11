@@ -18,8 +18,14 @@ public class Main {
 		
 		for (int i = 0; i < n; i++) {
 			System.out.println("Employee #" + (i + 1));
+			
 			System.out.println("Id:");
 			int id = sc.nextInt();
+			while(hasId(employees, id)) {
+				System.out.println("Id already taken. Try again: ");
+				id = sc.nextInt();
+			}
+			
 			sc.nextLine();
 			System.out.println("Name:");
 			String name = sc.nextLine();
@@ -30,28 +36,30 @@ public class Main {
 		}
 		
 		System.out.println("\nEnter the employee ID that will have salary increase: ");
-		int idToUpdate = sc.nextInt();
-		System.out.println("Enter the percentage to increase on employee salary: ");
-		int percentageToIncrease = sc.nextInt();
+		int id = sc.nextInt();
 		
-		for (Employee employee : employees) {
-			if (employee.getId() == idToUpdate) {
-				
-				/*double increaseAmount = employee.getSalary() * percentageToIncrease / 100;
-				double newSalary = employee.getSalary() + increaseAmount;*/
-				employee.increaseSalary(percentageToIncrease);
-				
-			}else {
-				System.out.println("\nThis ID doesn't exist!");
-			}
+		Employee emp = employees.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+		if(emp == null) {
+			System.out.println("This id does not exist!");
+		}else {
+			System.out.println("Enter the percentage to increase on employee salary: ");
+			int percentageToIncrease = sc.nextInt();
+			emp.increaseSalary(percentageToIncrease);
 		}
+		
 		System.out.println("------------------------------------------------------");
 		
 		System.out.println("List of employees: ");
 		for (Employee employee : employees) {
 			
-			System.out.println("Employee #" + employees.indexOf(employee) + 1 + " | Id: " + employee.getId() + ", Name: " + employee.getName() + 
+			System.out.println("Employee #" + (employees.indexOf(employee) + 1) + " | Id: " + employee.getId() + ", Name: " + employee.getName() + 
 					", Salary: " + employee.getSalary());
 		}
+		
+		
+	}
+		public static boolean hasId(List<Employee> employees, int id ) {
+			Employee emp = employees.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+			return emp != null;
 	}
 }
