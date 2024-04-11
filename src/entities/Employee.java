@@ -10,6 +10,12 @@ public class Employee {
 		this.name = name;
 		this.salary = salary;
 	}
+	
+	public void increaseSalary(int percentageToIncrease) {
+		double increaseAmount = getSalary() * percentageToIncrease / 100;
+		double newSalary = getSalary() + increaseAmount;
+		setSalary(newSalary);
+	}
 
 	public int getId() {
 		return id;

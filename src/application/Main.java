@@ -37,9 +37,10 @@ public class Main {
 		for (Employee employee : employees) {
 			if (employee.getId() == idToUpdate) {
 				
-				double increaseAmount = employee.getSalary() * percentageToIncrease / 100;
-				double newSalary = employee.getSalary() + increaseAmount;
-				employee.setSalary(newSalary);
+				/*double increaseAmount = employee.getSalary() * percentageToIncrease / 100;
+				double newSalary = employee.getSalary() + increaseAmount;*/
+				employee.increaseSalary(percentageToIncrease);
+				
 			}else {
 				System.out.println("\nThis ID doesn't exist!");
 			}
