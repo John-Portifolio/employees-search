@@ -29,7 +29,7 @@ public class Main {
 			employees.add(employee);
 		}
 		
-		System.out.println("Enter the employee ID that will have salary increase: ");
+		System.out.println("\nEnter the employee ID that will have salary increase: ");
 		int idToUpdate = sc.nextInt();
 		System.out.println("Enter the percentage to increase on employee salary: ");
 		int percentageToIncrease = sc.nextInt();
@@ -37,16 +37,19 @@ public class Main {
 		for (Employee employee : employees) {
 			if (employee.getId() == idToUpdate) {
 				
-				double increaseAmount = employee.getSalary() * (percentageToIncrease / 100);
+				double increaseAmount = employee.getSalary() * percentageToIncrease / 100;
 				double newSalary = employee.getSalary() + increaseAmount;
 				employee.setSalary(newSalary);
+			}else {
+				System.out.println("\nThis ID doesn't exist!");
 			}
 		}
+		System.out.println("------------------------------------------------------");
 		
 		System.out.println("List of employees: ");
 		for (Employee employee : employees) {
 			
-			System.out.println("Id: " + employee.getId() + ", Name: " + employee.getName() + 
+			System.out.println("Employee #" + employees.indexOf(employee) + 1 + " | Id: " + employee.getId() + ", Name: " + employee.getName() + 
 					", Salary: " + employee.getSalary());
 		}
 	}
